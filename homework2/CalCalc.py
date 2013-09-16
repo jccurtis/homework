@@ -2,4 +2,7 @@
 
 def calculate(INPUT):
 
-	return eval(INPUT)
+	try:
+		return eval(INPUT)
+	except Exception, e:
+		print 'Python cannot evaluate, using Wolfram Alpha'
