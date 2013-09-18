@@ -4,7 +4,7 @@ from types import StringType
 import urllib2
 from xml.etree.ElementTree import fromstring
 
-def calculate(INPUT, return_float=True):
+def calculate(INPUT, return_float=False):
 
 	assert type(INPUT) is StringType, "You must input a string."
 
