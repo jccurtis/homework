@@ -3,6 +3,7 @@
 from types import StringType
 import urllib2
 from xml.etree.ElementTree import fromstring
+import argparse
 
 def calculate(INPUT, return_float=False):
 
@@ -25,3 +26,10 @@ def calculate(INPUT, return_float=False):
 		return OUTPUT
 	else:
 		print OUTPUT
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(description='Wolfram Alpha String Calculator')
+	parser.add_argument('required_string', help='Input a string')
+	results = parser.parse_args()
+
+	calculate(results.required_string,False)
