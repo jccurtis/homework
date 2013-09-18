@@ -5,7 +5,7 @@ import urllib2
 from xml.etree.ElementTree import fromstring
 import argparse
 
-def calculate(INPUT, return_float=False):
+def calculate(INPUT, return_float=False, use_wolf=False):
 
 	assert type(INPUT) is StringType, "You must input a string."
 
@@ -13,7 +13,8 @@ def calculate(INPUT, return_float=False):
 		raise ValueError('Cannot evaluate input with underscores (_), it is not safe')
 
 	try:
-		print 'Python evaluation with eval function:'
+		if use_wolf==True:
+			raise ValueError('User wants to evaluate with Wolfram Alpha')
 		OUTPUT = eval(INPUT, {})
 	except Exception, e:
 		print 'Python cannot evaluate, using Wolfram Alpha...'
@@ -30,7 +31,8 @@ def calculate(INPUT, return_float=False):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Wolfram Alpha String Calculator')
-	parser.add_argument('required_string', help='Input a string')
+	parser.add_argument('INPUT', help='Input a string')
+	parser.add_argument('-w', action='store_true', default=False, dest='boolean_switch', help='Boolean switch to force Wolfram Usage')
 	results = parser.parse_args()
 
-	calculate(results.required_string,False)
+	calculate(results.INPUT,False,results.boolean_switch)
