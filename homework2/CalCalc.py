@@ -2,7 +2,7 @@
 
 from types import *
 
-def calculate(INPUT):
+def calculate(INPUT, return_float=True):
 
 	assert type(INPUT) is StringType, "You must input a string."
 
@@ -10,6 +10,11 @@ def calculate(INPUT):
 		raise ValueError('Cannot evaluate input with underscores (_), it is not safe')
 
 	try:
-		return eval(INPUT, {})
+		OUTPUT = eval(INPUT, {})
 	except Exception, e:
-		print 'Python cannot evaluate, using Wolfram Alpha'
+		print 'Python cannot evaluate, using Wolfram Alpha'		OUTPUT = 1.0 #not implemented
+
+	if return_float == True:
+		return OUTPUT
+	else:
+		print OUTPUT
