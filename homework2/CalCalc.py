@@ -1,6 +1,8 @@
 # AY250 Homework2 Wolfram Alpha Calculator
 
 from types import *
+import urllib2
+from xml.etree.ElementTree import fromstring
 
 def calculate(INPUT, return_float=True):
 
@@ -12,7 +14,12 @@ def calculate(INPUT, return_float=True):
 	try:
 		OUTPUT = eval(INPUT, {})
 	except Exception, e:
-		print 'Python cannot evaluate, using Wolfram Alpha'		OUTPUT = 1.0 #not implemented
+		print 'Python cannot evaluate, using Wolfram Alpha'
+		URL = 'http://api.wolframalpha.com/v2/query?input=' + INPUT.replace(' ', '%20') + '&appid=UAGAWR-3X6Y8W777Q'
+		print 'URL: ' + URL
+		response = urllib2.urlopen(URL)               #xml code from wolfram alpha
+		parsed_response = fromstring(response.read()) #convert xml to tree structure
+		OUTPUT = parsed_response[1][0][0].text        #takes the value of the 2nd child, 1st subchild, 1st subsubchild
 
 	if return_float == True:
 		return OUTPUT
