@@ -1,6 +1,6 @@
 # AY250 Homework2 Wolfram Alpha Calculator
 
-from types import *
+from types import StringType
 import urllib2
 from xml.etree.ElementTree import fromstring
 
@@ -14,7 +14,7 @@ def calculate(INPUT, return_float=True):
 	try:
 		OUTPUT = eval(INPUT, {})
 	except Exception, e:
-		print 'Python cannot evaluate, using Wolfram Alpha'
+		print 'Python cannot evaluate, using Wolfram Alpha...'
 		URL = 'http://api.wolframalpha.com/v2/query?input=' + INPUT.replace(' ', '%20') + '&appid=UAGAWR-3X6Y8W777Q'
 		print 'URL: ' + URL
 		response = urllib2.urlopen(URL)               #xml code from wolfram alpha
