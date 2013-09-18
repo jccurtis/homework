@@ -13,6 +13,7 @@ def calculate(INPUT, return_float=False):
 		raise ValueError('Cannot evaluate input with underscores (_), it is not safe')
 
 	try:
+		print 'Python evaluation with eval function:'
 		OUTPUT = eval(INPUT, {})
 	except Exception, e:
 		print 'Python cannot evaluate, using Wolfram Alpha...'
