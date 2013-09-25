@@ -1,4 +1,3 @@
+# AY250 HW3
 
-Known bugs:
-1) Cannot get clicking to reset selection box to full size
-2)
+I did not complete the third problem of this assignment. See notebooks for documentation. 
