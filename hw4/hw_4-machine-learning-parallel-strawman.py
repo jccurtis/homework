@@ -9,8 +9,8 @@ from multiprocessing import Pool, cpu_count
 from pylab import imread
 from time import time
 
-## CHANGE THIS NEXT LINE!
-MYDIRECTORY = "/Users/jbloom/Classes/ay250-py4sci/week4/50_categories"
+## CHANGE THIS NEXT LINE! - Changed joey
+MYDIRECTORY = "/Users/josephcurtis/python/ay250/homework/hw4/50_categories"
 
 # FUNCTION DEFINITIONS
 # Quick function to divide up a large list into multiple small lists, 
@@ -51,9 +51,9 @@ print ("There should be 4244 images, actual number is " +
 
 # Then, we run the feature extraction function using multiprocessing.Pool so 
 # so that we can parallelize the process and run it much faster.
-numprocessors = cpu_count() # To see results of parallelizing, set numprocessors
+#numprocessors = cpu_count() # To see results of parallelizing, set numprocessors
                             # to less than cpu_count().
-# numprocessors = 1
+numprocessors = 1
 
 # We have to cut up the image_paths list into the number of processes we want to
 # run. 
