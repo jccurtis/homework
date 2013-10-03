@@ -7,6 +7,7 @@
 - Feature extraction on a quad-core 2.2 GHz MBP takes 1178.992s about **20 minutes.**
 - With my testing of training on 90% of the data and testing on 10% I got about **30% accuracy**.
 - I didn't have time to finish a function (run_final_classifier) to loop through all of the files in a directory or do cross validation. I did make a feature extraction function in functions.py which can be imported. I tried to spend my time on the classifier.
+- I saved the classifier (built form the full feature set) (classifier.npy), feature list (features_save.npy) and catagories (catagories_save.npy)
 
 #### TO DO:
 
