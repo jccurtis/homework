@@ -73,7 +73,7 @@ class Test(HasTraits):
         self.imArr = colorDirectionSwap(self.imArr)
         self.imshow()
     def _imageSave_fired(self):
-        plt.imsave(self.imageSaveName,self.imArr)
+        plt.imsave('saved_images/'+self.imageSaveName,self.imArr)
     def _reset_fired(self):                                      #reset to original downloaded image (only if it downloaded)
         try:
             self.imArr = plt.imread(self.fName)
