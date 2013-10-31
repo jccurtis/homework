@@ -16,14 +16,16 @@ class Test(HasTraits):
     the Google image search API and edit the image.
     '''
     query              = Str
+    url                = Str
     runQuery           = Button
     gaussianBlur       = Button
     rotate             = Button
     fourierGaussian    = Button
     vignette           = Button
     colorDirectionSwap = Button
+    imageSaveName      = Str
+    imageSave          = Button
     reset              = Button 
-    url                = Str
     figure             = Instance(Figure, ())
     view = View(Item('query'),
                 Item('runQuery', show_label=False),
@@ -34,16 +36,19 @@ class Test(HasTraits):
                 Item('fourierGaussian', show_label=False),
                 Item('vignette', show_label=False),
                 Item('colorDirectionSwap', show_label=False),
+                Item('imageSaveName'),
+                Item('imageSave', show_label=False),
                 Item('reset', show_label=False),
                 title = 'Google Image Search',
                 buttons=['OK'],
                 width=800,
                 height=800,
                 resizable=False)
-    
+
     def __init__(self):                                          # start the gui with a temp image loaded
 #        super(Test, self).__init__()
         axes = self.figure.add_subplot(111)
+        self.imageSaveName = 'default_image.jpg'                 #set default image name for saving
         self.imArr = plt.imread('_placeholder_.jpeg')
         axes.imshow(self.imArr)
     def _runQuery_fired(self):                                   #image search with scrape_image from image_search.py BUTTON                     
@@ -67,6 +72,8 @@ class Test(HasTraits):
     def _colorDirectionSwap_fired(self):                         #swap color and direction BUTTON
         self.imArr = colorDirectionSwap(self.imArr)
         self.imshow()
+    def _imageSave_fired(self):
+        plt.imsave(self.imageSaveName,self.imArr)
     def _reset_fired(self):                                      #reset to original downloaded image (only if it downloaded)
         try:
             self.imArr = plt.imread(self.fName)
