@@ -35,7 +35,7 @@ def scrape_image(query):
     # Get results using JSON each item contains one response
     results = simplejson.load(response)['responseData']['results']
     # Save first image with a check to make sure the image downloads correctly (unlikely that 8 images wouldn't work)
-    fName = query+'.jpg'
+    fName = 'downloaded_images/'+query+'.jpg'
     counter = 0
     for result in results:
         url = result['unescapedUrl']
