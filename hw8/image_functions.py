@@ -21,13 +21,12 @@ def scrape_image(query):
                     and not be a broken link.
     
     Outputs:     url   - string of scraped image url
-                 fName - filename of scraped image
+                 fName - filename of scraped and SAVED image
                  imArr - numpy array of image
     '''
     # Format url and pull raw web JSON code
     urlQuery = 'https://ajax.googleapis.com/ajax/services/search/images?' + \
                 urllib.urlencode(OrderedDict([('q',query),
-                                              ('imgsz','medium'),
                                               ('as_filetype','jpg'),
                                               ('v','1.0'),
                                               ('rsz','8')]))
@@ -91,3 +90,30 @@ def vignette(imArr):
     else:
         imArrMasked = imArr*imMaskNorm
     return imArrMasked
+
+def colorDirectionSwap(imArr):
+    '''
+    Shifts each color channel to the next one:
+        Red   -> Green
+        Green -> Blue
+        Blue  -> Red
+    Flips the image on the x axis (left/right).
+    
+    NOTE: If the image is greyscale, only the x axis is flipped 
+    since there are no color channels to swap.
+    
+    Input: imArr - numpy image array of 1 or 3 bit depth
+    
+    Output: imArr - numpy image array with color channels and left right directions swapped
+    '''
+    if len(imArr.shape) == 3:
+        imTemp = np.zeros_like(imArr)
+        imTemp[...,1] = imArr[...,0] #R -> G
+        imTemp[...,2] = imArr[...,1] #G -> B
+        imTemp[...,0] = imArr[...,2] #B -> R
+        imArr         = imTemp[:,::-1,:] #flip left right
+    elif len(self._imShape_) == 2:
+        imArr = imArr[:,::-1] #flip left right
+    else:
+        raise ValueError('Image array is not shaped correctly.')
+    return imArr
