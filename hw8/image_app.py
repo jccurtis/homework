@@ -17,7 +17,9 @@ class Test(HasTraits):
     Traits GUI class for image scraping and basic processing. Excecuting 
     builds a Traits GUI object which needs to be configured to run (see
     below for if __name__ = '__main__'). The GUI allows the user to query
-    the Google image search API and edit the image.
+    the Google image search API, download the queried image to 'downloaded_images'
+    folder, edit the image, save the image into 'saved_images' folder and reset 
+    the image modifications. The GUI isn't very clean but it functions properly.
     '''
     query              = Str
     url                = Str
