@@ -31,3 +31,5 @@ hw6/.ipynb_checkpoints/problem1-checkpoint.ipynb
 hw8/mpl_figure_editor.pyc
 
 hw8/.ipynb_checkpoints/testing-checkpoint.ipynb
+
+*.pyc
