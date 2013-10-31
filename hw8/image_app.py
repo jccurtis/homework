@@ -1,6 +1,10 @@
 from matplotlib.figure import *
-from enthought.traits.api import *
-from enthought.traits.ui.api import *
+try:
+    from enthought.traits.api import *
+    from enthought.traits.ui.api import *
+except:
+    from traits.api import *
+    from traitsui.api import *
 from mpl_figure_editor import MPLFigureEditor
 import matplotlib.pyplot as plt
 import wx
