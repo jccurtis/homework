@@ -2,7 +2,7 @@ import wx
 
 import matplotlib
 # We want matplotlib to use a wxPython backend
-#matplotlib.use('WXAgg')
+matplotlib.use('WXAgg')
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_wx import NavigationToolbar2Wx
