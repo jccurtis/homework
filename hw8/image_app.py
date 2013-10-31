@@ -16,22 +16,22 @@ class Test(HasTraits):
     the Google image search API and edit the image.
     '''
     query              = Str
-    run_query          = Button
-    gaussian_filter    = Button
+    runQuery           = Button
+    gaussianBlur       = Button
     rotate             = Button
-    fourier_gaussian   = Button
+    fourierGaussian    = Button
     vignette           = Button
     colorDirectionSwap = Button
     reset              = Button 
     url                = Str
     figure             = Instance(Figure, ())
     view = View(Item('query'),
-                Item('run_query', show_label=False),
+                Item('runQuery', show_label=False),
                 Item('url'),
                 Item('figure', editor=MPLFigureEditor(), show_label=False),
-                Item('gaussian_filter', show_label=False),
+                Item('gaussianBlur', show_label=False),
                 Item('rotate', show_label=False),
-                Item('fourier_gaussian', show_label=False),
+                Item('fourierGaussian', show_label=False),
                 Item('vignette', show_label=False),
                 Item('colorDirectionSwap', show_label=False),
                 Item('reset', show_label=False),
@@ -40,33 +40,34 @@ class Test(HasTraits):
                 width=800,
                 height=800,
                 resizable=False)
-    def __init__(self):                                           # start the gui with a temp image loaded
+    
+    def __init__(self):                                          # start the gui with a temp image loaded
 #        super(Test, self).__init__()
         axes = self.figure.add_subplot(111)
         self.imArr = plt.imread('_placeholder_.jpeg')
         axes.imshow(self.imArr)
-    def _run_query_fired(self):                                   #image search with scrape_image from image_search.py BUTTON                     
+    def _runQuery_fired(self):                                   #image search with scrape_image from image_search.py BUTTON                     
         (url,fName,imArr) = scrape_image(self.query)
         self.imArr = imArr  #numpy image array
         self.url = url      #image url
         self.fName = fName  #downloaded filename
         self.imshow()
-    def _gaussian_filter_fired(self):                             #gaussian blur BUTTON
-        self.imArr = ndimage.filters.gaussian_filter(self.imArr, 2.0)
+    def _gaussianBlur_fired(self):                               #gaussian blur BUTTON
+        self.imArr = ndimage.gaussian_filter(self.imArr, 10.0)
         self.imshow()
-    def _rotate_fired(self):                                      #90 deg CCW rotation BUTTON
-        self.imArr = ndimage.interpolation.rotate(self.imArr, 90.0)
+    def _rotate_fired(self):                                     #90 deg CCW rotation BUTTON
+        self.imArr = ndimage.rotate(self.imArr, 90.0)
         self.imshow()
-    def _fourier_gaussian_fired(self):                            #fourier gaussian transform BUTTON
-        self.imArr = ndimage.fourier.fourier_gaussian(self.imArr, 2.0)
+    def _fourierGaussian_fired(self):                            #fourier gaussian transform BUTTON
+        self.imArr = ndimage.fourier_gaussian(self.imArr, 2.0)
         self.imshow()
-    def _vignette_fired(self):
+    def _vignette_fired(self):                                   #vignette BUTTON
         self.imArr = vignette(self.imArr)
         self.imshow()
-    def _colorDirectionSwap_fired(self):
+    def _colorDirectionSwap_fired(self):                         #swap color and direction BUTTON
         self.imArr = colorDirectionSwap(self.imArr)
         self.imshow()
-    def _reset_fired(self):                                       #reset to original downloaded image (only if it downloaded)
+    def _reset_fired(self):                                      #reset to original downloaded image (only if it downloaded)
         try:
             self.imArr = plt.imread(self.fName)
             self.imshow()
