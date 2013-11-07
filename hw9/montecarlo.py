@@ -31,4 +31,4 @@ def darts(numDarts):
 	piApprox = 4*circleDarts/float(numDarts)     #extract pi from mc run
 	execTime = end-start                         #execution time
 	dartsPerSec = numDarts/float(execTime)       #darts thrown per sec
-	return piApprox,circleDarts,numDarts,execTime,dartsPerSec
+	return piApprox,circleDarts,numDarts,execTime
